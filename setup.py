@@ -9,6 +9,6 @@ setup(
     description="audioclip",
     version="0.0.1",
     packages=find_packages(exclude=["test", "*.test", "*.test.*"]),
-    install_requires=None,
+    install_requires=["pytorch-ignite"],
     extras_require={"tests": ["pytest"]},
 )
