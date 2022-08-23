@@ -11,8 +11,9 @@ import regex as re
 
 import audioclip
 def default_bpe():
-    return str(audioclip.ROOT.parent /  'assets' / 'bpe_simple_vocab_16e6.txt.gz')
-
+    bpe = str(audioclip.ROOT.parent /  'assets' / 'bpe_simple_vocab_16e6.txt.gz')
+    print(bpe)
+    return bpe
 
 def bytes_to_unicode():
     """
