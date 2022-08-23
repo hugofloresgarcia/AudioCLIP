@@ -10,12 +10,10 @@ import regex as re
 
 
 import audioclip
-@lru_cache()
 def default_bpe():
     return str(audioclip.ROOT.parent /  'assets' / 'bpe_simple_vocab_16e6.txt.gz')
 
 
-@lru_cache()
 def bytes_to_unicode():
     """
     Returns list of utf-8 byte and a corresponding list of unicode strings.
