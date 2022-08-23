@@ -13,7 +13,7 @@ import torch.utils.data as td
 
 import sklearn.model_selection as skms
 
-import utils.transforms as transforms
+import audioclip.utils.transforms as transforms
 
 from typing import Any
 from typing import Dict

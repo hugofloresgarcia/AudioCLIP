@@ -5,9 +5,9 @@ import torch.nn.functional as F
 
 import torchvision as tv
 
-from utils import transforms
-from model.esresnet.base import _ESResNet
-from model.esresnet.base import Bottleneck
+from audioclip.utils import transforms
+from audioclip.model.esresnet.base import _ESResNet
+from audioclip.model.esresnet.base import Bottleneck
 
 from typing import cast
 from typing import List
@@ -135,19 +135,18 @@ class _ESResNetFBSP(_ESResNet):
         )
 
     def spectrogram(self, x: torch.Tensor) -> torch.Tensor:
-        with torch.no_grad():
-            frames = transforms.frame_signal(
-                signal=x.view(-1, x.shape[-1]),
-                frame_length=self.win_length,
-                hop_length=self.hop_length,
-                window=self.window
-            )
+        frames = transforms.frame_signal(
+            signal=x.view(-1, x.shape[-1]),
+            frame_length=self.win_length,
+            hop_length=self.hop_length,
+            window=self.window
+        )
 
-            if self.n_fft > self.win_length:
-                pad_length = self.n_fft - self.win_length
-                pad_left = pad_length // 2
-                pad_right = pad_length - pad_left
-                frames = F.pad(frames, [pad_left, pad_right])
+        if self.n_fft > self.win_length:
+            pad_length = self.n_fft - self.win_length
+            pad_left = pad_length // 2
+            pad_right = pad_length - pad_left
+            frames = F.pad(frames, [pad_left, pad_right])
 
         spec, ttf_weights_ = self.fbsp(frames)
 

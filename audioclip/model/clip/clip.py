@@ -12,7 +12,7 @@ from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normal
 from tqdm import tqdm
 
 from .model import build_model
-from utils.simple_tokenizer import SimpleTokenizer as _Tokenizer
+from audioclip.utils.simple_tokenizer import SimpleTokenizer as _Tokenizer
 
 __all__ = ["available_models", "load", "tokenize"]
 _tokenizer = _Tokenizer()
@@ -179,7 +179,7 @@ def tokenize(texts: Union[str, List[str]], context_length: int = 77) -> torch.Lo
     """
     if isinstance(texts, str):
         texts = [texts]
-
+    # breakpoint()
     sot_token = _tokenizer.encoder["<|startoftext|>"]
     eot_token = _tokenizer.encoder["<|endoftext|>"]
     all_tokens = [[sot_token] + _tokenizer.encode(text) + [eot_token] for text in texts]

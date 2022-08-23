@@ -3,9 +3,10 @@ import os
 import torch
 import torch.nn.functional as F
 
-from model.clip import CLIP
-from model.clip.clip import tokenize
-from model.esresnet import ESResNeXtFBSP
+import audioclip
+from audioclip.model.clip import CLIP
+from audioclip.model.clip.clip import tokenize
+from audioclip.model.esresnet import ESResNeXtFBSP
 
 from typing import List
 from typing import Tuple
@@ -98,13 +99,13 @@ class AudioCLIP(CLIP):
             self.load_state_dict(torch.load(self.pretrained, map_location='cpu'), strict=False)
         elif self.pretrained:
             self.load_state_dict(torch.load(
-                os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'assets', 'CLIP.pt'),
+                audioclip.ROOT.parent / 'assets' / 'CLIP.pt',
                 map_location='cpu'
             ), strict=False)
             print('Image & Text weights loaded')
             try:
                 self.audio.load_state_dict(torch.load(
-                    os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'assets', 'ESRNXFBSP.pt'),
+                    audioclip.ROOT.parent / 'assets' / 'ESRNXFBSP.pt',
                     map_location='cpu'
                 ), strict=False)
             except RuntimeError as ex:

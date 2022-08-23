@@ -10,8 +10,8 @@ import torchvision as tv
 
 import ignite_trainer as it
 
-from model.esresnet import attention
-from utils.transforms import scale
+from audioclip.model.esresnet import attention
+from audioclip.utils.transforms import scale
 
 from typing import cast
 from typing import List
